@@ -4,5 +4,10 @@ export default createMuiTheme({
 	palette: {
 		primary: teal,
 		secondary: amber
+	},
+	'@global': {
+		body: {
+			backgroundColor: 'green'
+		}
 	}
 });

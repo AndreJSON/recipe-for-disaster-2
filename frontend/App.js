@@ -9,11 +9,10 @@ import List from './components/List';
 import Recipe from './components/Recipe';
 import Edit from './components/Edit';
 
-export default class App extends Component {
-	render() {
-		return (
+const App = () => {
+	return (
+		<React.Fragment>
 			<MuiThemeProvider theme={Theme}>
-			<React.Fragment>
 				<CssBaseline/>
 				<BrowserRouter>
 					<div>
@@ -23,8 +22,9 @@ export default class App extends Component {
 						<Route path='/edit' component={Edit}/>
 					</div>
 				</BrowserRouter>
-			</React.Fragment>
 			</MuiThemeProvider>
-		);
-	}
-}
+		</React.Fragment>
+	);
+};
+
+export default App;
