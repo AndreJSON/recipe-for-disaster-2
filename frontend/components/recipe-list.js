@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import axios from 'axios';
-import ListItem from './ListItem';
+import RecipeListItem from './recipe-list-item';
 
-class List extends Component {
+class RecipeList extends Component {
 	componentDidMount() {
 		axios.get('/api/recipes')
 		.then((res) => {
@@ -17,7 +17,7 @@ class List extends Component {
 	render() {
 		const recipeList = this.props.recipes.map(recipe => {
 			return (
-				<ListItem recipe={recipe} key={recipe._id}/>
+				<RecipeListItem recipe={recipe} key={recipe._id}/>
 			)
 		});
 		return (
@@ -42,4 +42,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(List);
+export default connect(mapStateToProps,mapDispatchToProps)(RecipeList);

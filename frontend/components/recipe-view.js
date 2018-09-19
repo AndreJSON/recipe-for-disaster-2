@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-const Edit = () => {
+const RecipeView = () => {
 	return (
 		<div>
-			<p>hej edit</p>
+			<p>hej recipe</p>
 		</div>
 	);
 }
 
-export default Edit;
+export default RecipeView;

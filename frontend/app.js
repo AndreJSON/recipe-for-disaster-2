@@ -4,10 +4,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter, Route } from 'react-router-dom';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import Theme from './theme.js';
-import Navbar from './components/Navbar';
-import List from './components/List';
-import Recipe from './components/Recipe';
-import Edit from './components/Edit';
+import Navbar from './components/navbar';
+import RecipeList from './components/recipe-list';
+import RecipeView from './components/recipe-view';
+import RecipeEditor from './components/recipe-editor';
 
 const App = () => {
 	return (
@@ -17,9 +17,9 @@ const App = () => {
 				<BrowserRouter>
 					<div>
 						<Navbar/>
-						<Route exact path='/' component={List}/>
-						<Route path='/recipe' component={Recipe}/>
-						<Route path='/edit' component={Edit}/>
+						<Route exact path='/' component={RecipeList}/>
+						<Route path='/recipe' component={RecipeView}/>
+						<Route path='/edit' component={RecipeEditor}/>
 					</div>
 				</BrowserRouter>
 			</MuiThemeProvider>

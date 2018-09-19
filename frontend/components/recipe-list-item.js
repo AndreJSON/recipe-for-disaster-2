@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const ListItem = (props) => {
+const RecipeListItem = (props) => {
 	return (
 		<div>
 			<p>{props.recipe.text}</p>
@@ -8,4 +8,4 @@ const ListItem = (props) => {
 	);
 }
 
-export default ListItem;
+export default RecipeListItem;
