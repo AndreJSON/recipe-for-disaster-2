@@ -1,15 +1,15 @@
 import './app.css';
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { BrowserRouter, Route } from 'react-router-dom';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import Theme from './theme.js';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Navbar from './components/navbar';
 import RecipeList from './components/recipe-list';
 import RecipeView from './components/recipe-view';
 import RecipeEditor from './components/recipe-editor';
 
-const App = () => {
+const App = (props) => {
 	return (
 		<React.Fragment>
 			<MuiThemeProvider theme={Theme}>
@@ -17,9 +17,11 @@ const App = () => {
 				<BrowserRouter>
 					<div>
 						<Navbar/>
-						<Route exact path='/' component={RecipeList}/>
-						<Route path='/recipe' component={RecipeView}/>
-						<Route path='/edit' component={RecipeEditor}/>
+						<div className="side-padded">
+							<Route exact path='/' component={RecipeList}/>
+							<Route path='/recipe' component={RecipeView}/>
+							<Route path='/edit' component={RecipeEditor}/>
+						</div>
 					</div>
 				</BrowserRouter>
 			</MuiThemeProvider>

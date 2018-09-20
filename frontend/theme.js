@@ -1,9 +1,16 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { teal, amber } from '@material-ui/core/colors';
 export default createMuiTheme({
 	palette: {
-		primary: teal,
-		secondary: amber
+		primary: {
+			main: "#009688",
+			light: "#52c7b8",
+			dark: "#00675b"
+		},
+		secondary: {
+			main: "#ba68c8",
+			light: "#ee98fb",
+			dark: "#883997"
+		}
 	},
 	'@global': {
 		body: {
