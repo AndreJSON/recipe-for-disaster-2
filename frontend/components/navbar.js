@@ -70,9 +70,9 @@ const Navbar = (props) => {
 					<div className="flex" />
 					<div className={classes.searchDiv}>
 						<div className={classes.searchIconDiv}>
-							<SearchIcon color="inherit" aria-label="Search recipes" />
+							<SearchIcon color="inherit" aria-label="Filter recipes" />
 						</div>
-						<Input classes={{ root: classes.inputRoot, input: classes.inputInput }} placeholder="Search…" disableUnderline />
+						<Input classes={{ root: classes.inputRoot, input: classes.inputInput }} placeholder="Filter…" disableUnderline />
 					</div>
 				</Toolbar>
 			</AppBar>

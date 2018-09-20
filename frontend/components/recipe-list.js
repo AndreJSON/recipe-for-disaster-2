@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
-import axios from 'axios';
+import { fetchRecipes } from '../actions';
 import RecipeListItem from './recipe-list-item';
 
 class RecipeList extends Component {
 	componentDidMount() {
-		axios.get('/api/recipes')
-		.then((res) => {
-			this.props.setRecipes(res.data.recipes);
-		})
-		.catch((err) => {
-			console.log(err);
-		})
+		this.props.fetchRecipes();
 	}
 	render() {
 		const recipeList = this.props.recipes.map(recipe => {
@@ -29,16 +23,16 @@ class RecipeList extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	const qs = queryString.parse(ownProps.location.search);
+	const qs = queryString.parse(ownProps.location.filter);
 	return {
-		search: qs.search,
+		filter: qs.filter,
 		recipes: state.recipes
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		setRecipes: (recipes) => {dispatch({type: 'SET_RECIPES', recipes: recipes})}
+		fetchRecipes: () => {dispatch(fetchRecipes())}
 	}
 }
 
