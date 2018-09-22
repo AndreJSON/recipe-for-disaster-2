@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRecipes } from '../actions';
-import { CircularProgress, Grid } from '@material-ui/core';
+import { CircularProgress, Grid, List} from '@material-ui/core';
 import RecipeListItem from './recipe-list-item';
 
 class RecipeList extends Component {
@@ -23,7 +23,9 @@ class RecipeList extends Component {
 			});
 			content = (
 				<Grid item xs={12} md={10} lg={8}>
-					{recipeList}
+					<List>
+						{recipeList}
+					</List>
 				</Grid>
 			);
 		}
