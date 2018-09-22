@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const RecipeView = () => {
+const RecipeView = (props) => {
 	return (
 		<div>
-			<p>hej recipe</p>
+			<p>{props.recipe._id}</p>
 		</div>
 	);
 }
 
-export default RecipeView;
+const mapStateToProps = (state, ownProps) => {
+	return {
+		recipe: state.recipes.find((x) => x._id === ownProps.match.params.id)
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+	}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(RecipeView);

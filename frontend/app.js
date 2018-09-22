@@ -19,7 +19,7 @@ const App = (props) => {
 						<Navbar/>
 						<div className="side-padded">
 							<Route exact path='/' component={RecipeList}/>
-							<Route path='/recipe' component={RecipeView}/>
+							<Route path='/recipe/:id' component={RecipeView}/>
 							<Route path='/edit' component={RecipeEditor}/>
 						</div>
 					</div>

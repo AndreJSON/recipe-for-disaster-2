@@ -8,7 +8,7 @@ const RecipeListItem = (props) => {
 	});
 
 	return (
-		<ListItem button={true} onClick={() => {props.history.push("/recipe?_id=" + props.recipe._id)}}>
+		<ListItem button={true} onClick={() => {props.history.push("/recipe/" + props.recipe._id)}}>
 			<ListItemText primary={props.recipe.text} secondary={tags}/>
 		</ListItem>
 	);
