@@ -20,7 +20,6 @@
 		"html-webpack-plugin": "3.2.0",
 		"mongoose": "5.2.14",
 		"nodemon": "1.18.4",
-		"query-string": "6.1.0",
 		"react": "16.4.2",
 		"react-dom": "16.4.2",
 		"react-redux": "5.0.7",
@@ -38,6 +37,7 @@
 	"scripts": {
 		"start": "node backend/server.js",
 		"build": "webpack --mode production",
+		"deploy": "npm run build && npm start",
 		"server": "nodemon backend/server.js",
 		"client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
 		"dev": "concurrently \"npm run server\" \"npm run client\""

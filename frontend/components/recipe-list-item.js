@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-import { ListItem, ListItemText } from '@material-ui/core'
+import { withRouter } from 'react-router-dom';
+import { ListItem, ListItemText } from '@material-ui/core';
 
 const RecipeListItem = (props) => {
 	const tags = props.recipe.tags.map((item,index,arr) => {

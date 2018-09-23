@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
+import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, IconButton, Input, Fade } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import BackIcon from '@material-ui/icons/NavigateBefore'
 import ListIcon from '@material-ui/icons/FormatListBulleted';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
@@ -10,6 +12,9 @@ import SearchIcon from '@material-ui/icons/Search';
 const styles = (theme) => ({
 	largeIcon: {
 		fontSize: "40px"
+	},
+	largerIcon: {
+		fontSize: "50px"
 	},
 	largeButton: {
 		height: "56px",
@@ -23,11 +28,12 @@ const styles = (theme) => ({
 			backgroundColor: fade(theme.palette.common.white, 0.25),
 		},
 		marginLeft: 0,
+		marginRight: "15px",
 		width: '100%',
 		[theme.breakpoints.up('sm')]: {
 			marginLeft: theme.spacing.unit,
 			width: 'auto',
-		},
+		}
 	},
 	searchIconDiv: {
 		width: theme.spacing.unit * 8,
@@ -60,14 +66,20 @@ const Navbar = (props) => {
 	return (
 		<div>
 			<AppBar position="static" color="primary">
-				<Toolbar>
-					<IconButton className={classes.largeButton} color="inherit" aria-label="List recipes">
+				<Toolbar disableGutters={true}>
+					<IconButton className={classes.largeButton} color="inherit" aria-label="Back"
+						onClick={() => {props.history.goBack();}} disabled={!props.location.pathname.startsWith("/recipe")}>
+						<BackIcon className={classes.largerIcon} />
+					</IconButton>
+					<IconButton className={classes.largeButton} color="inherit" aria-label="List recipes"
+						component={NavLink} to="/">
 						<ListIcon className={classes.largeIcon} />
 					</IconButton>
-					<IconButton className={classes.largeButton} color="inherit" aria-label="Add recipe">
+					<IconButton className={classes.largeButton} color="inherit" aria-label="Add recipe"
+						component={NavLink} to="/edit">
 						<AddIcon className={classes.largeIcon} />
 					</IconButton>
-					<div className="flex" />
+					<div className="flex"/>
 					<div className={classes.searchDiv}>
 						<div className={classes.searchIconDiv}>
 							<SearchIcon color="inherit" aria-label="Filter recipes" />
@@ -76,9 +88,8 @@ const Navbar = (props) => {
 					</div>
 				</Toolbar>
 			</AppBar>
-			<li><NavLink to="/edit">Edit</NavLink></li>
 		</div>
 	);
 }
 
-export default withStyles(styles)(Navbar);
+export default withRouter(withStyles(styles)(Navbar));
