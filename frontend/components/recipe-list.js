@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRecipes } from '../actions';
-import { CircularProgress, Grid, List} from '@material-ui/core';
+import { Grid, List} from '@material-ui/core';
 import RecipeListItem from './recipe-list-item';
+import Spinner from './spinner';
 
 class RecipeList extends Component {
 	componentDidMount() {
@@ -13,7 +14,7 @@ class RecipeList extends Component {
 		var content;
 		if(this.props.isFetching) {
 			content = (
-				<CircularProgress color="secondary" thickness={5}/>
+				<Spinner/>
 			);
 		} else {
 			const recipeList = this.props.recipes.map(recipe => {
@@ -30,13 +31,11 @@ class RecipeList extends Component {
 			);
 		}
 		return (
-			<div>
-				<Grid container>
-					<Grid item xs/>
-					{content}
-					<Grid item xs/>
-				</Grid>
-			</div>
+			<Grid container>
+				<Grid item xs/>
+				{content}
+				<Grid item xs/>
+			</Grid>
 		);
 	}
 }

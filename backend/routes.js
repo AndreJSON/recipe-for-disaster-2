@@ -1,4 +1,5 @@
 const express = require('express');
+var path = require('path');
 const router = express.Router();
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/rfd', {useNewUrlParser: true});
@@ -17,6 +18,11 @@ module.exports = (app) => {
 				res.end();
 			}
 		});
+	});
+
+	//Catch all non-api calls and let react-router handle it.
+	app.get('/*', (req, res) => {
+		res.sendFile(path.join(__dirname, '../dist/index.html'));
 	});
 
 	app.post('/api/recipe', (req,res) => {
