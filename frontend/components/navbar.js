@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, IconButton, Input, Fade } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Input } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import BackIcon from '@material-ui/icons/NavigateBefore'
 import ListIcon from '@material-ui/icons/FormatListBulleted';

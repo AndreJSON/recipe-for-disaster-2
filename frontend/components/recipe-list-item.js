@@ -9,7 +9,7 @@ const RecipeListItem = (props) => {
 
 	return (
 		<ListItem button={true} onClick={() => {props.history.push("/recipe/" + props.recipe._id)}}>
-			<ListItemText primary={props.recipe.text} secondary={tags}/>
+			<ListItemText primary={props.recipe.title} secondary={tags}/>
 		</ListItem>
 	);
 }
