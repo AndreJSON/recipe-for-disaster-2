@@ -7,9 +7,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Navbar from './components/navbar';
 import RecipeList from './components/recipe-list';
 import RecipeView from './components/recipe-view';
-import RecipeEditor from './components/recipe-editor';
 
-const App = (props) => {
+const App = () => {
 	return (
 		<React.Fragment>
 			<MuiThemeProvider theme={Theme}>
@@ -17,10 +16,9 @@ const App = (props) => {
 				<BrowserRouter>
 					<div>
 						<Navbar/>
-						<div className="side-padded">
+						<div className="padded">
 							<Route exact path='/' component={RecipeList}/>
 							<Route path='/recipe/:id' component={RecipeView}/>
-							<Route path='/edit' component={RecipeEditor}/>
 						</div>
 					</div>
 				</BrowserRouter>

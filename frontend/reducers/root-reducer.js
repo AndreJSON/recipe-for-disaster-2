@@ -1,7 +1,8 @@
-import { REQUEST_RECIPES, RECEIVE_RECIPES } from '../actions';
+import { REQUEST_RECIPES, RECEIVE_RECIPES, TOGGLE_EDIT_MODE } from '../actions';
 
 const initState = {
-	isFetching: false,
+	fetching: false,
+	editing: false,
 	recipes: []
 }
 
@@ -10,13 +11,18 @@ const rootReducer = (state = initState, action) => {
 		case REQUEST_RECIPES:
 			return {
 				...state,
-				isFetching: true
+				fetching: true
 			};
 		case RECEIVE_RECIPES:
 			return {
 				...state,
-				isFetching: false,
+				fetching: false,
 				recipes: action.recipes
+			};
+		case TOGGLE_EDIT_MODE:
+			return {
+				...state,
+				editing: action.value
 			};
 		default:
 			return state;

@@ -12,7 +12,7 @@ class RecipeList extends Component {
 	
 	render() {
 		var content;
-		if(this.props.isFetching) {
+		if(this.props.fetching) {
 			content = (
 				<Spinner/>
 			);
@@ -42,7 +42,7 @@ class RecipeList extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		isFetching: state.isFetching,
+		fetching: state.fetching,
 		recipes: state.recipes
 	}
 }

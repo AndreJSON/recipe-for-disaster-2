@@ -27,3 +27,11 @@ export function fetchRecipes() {
 		})
 	}
 }
+
+export const TOGGLE_EDIT_MODE = "TOGGLE_EDIT_MODE";
+export function toggleEditMode(value) {
+	return {
+		type: TOGGLE_EDIT_MODE,
+		value: value
+	}
+}

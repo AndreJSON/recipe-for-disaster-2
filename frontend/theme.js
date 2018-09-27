@@ -11,10 +11,5 @@ export default createMuiTheme({
 			light: "#ee98fb",
 			dark: "#883997"
 		}
-	},
-	'@global': {
-		body: {
-			backgroundColor: 'green'
-		}
 	}
 });

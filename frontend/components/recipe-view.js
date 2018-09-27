@@ -12,7 +12,7 @@ class RecipeView extends Component {
 
 	render() {
 		var content;
-		if(this.props.isFetching || this.props.recipe === undefined) {
+		if(this.props.fetching || this.props.recipe === undefined) {
 			content = (
 				<Spinner/>
 			);
@@ -35,7 +35,7 @@ class RecipeView extends Component {
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		isFetching: state.isFetching,
+		fetching: state.fetching,
 		recipe: state.recipes.find((x) => x._id === ownProps.match.params.id)
 	};
 }
