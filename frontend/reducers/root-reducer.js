@@ -1,7 +1,8 @@
 import {
-	REQUEST_RECIPES, RECEIVE_RECIPES, TOGGLE_EDIT_MODE,
+	REQUEST_RECIPES, RECEIVE_RECIPES, SET_EDIT_MODE,
 	SET_DRAFT_RECIPE, SET_DRAFT_TITLE, SET_DRAFT_TEXT,
-	ADD_DRAFT_TAG, DELETE_DRAFT_TAG, SET_FILTER_TEXT
+	ADD_DRAFT_TAG, DELETE_DRAFT_TAG, SET_FILTER_TEXT,
+	ADD_EMPTY_RECIPE
 } from '../actions';
 
 const initState = {
@@ -24,6 +25,11 @@ const rootReducer = (state = initState, action) => {
 				fetching: false,
 				recipes: action.recipes
 			};
+		case ADD_EMPTY_RECIPE:
+			return {
+				...state,
+				recipes: [...state.recipes, {_id:action.id,title:"",text:"",tags:[]}]
+			}
 		case SET_DRAFT_RECIPE:
 			return {
 				...state,
@@ -45,7 +51,7 @@ const rootReducer = (state = initState, action) => {
 					text: action.text
 				}
 			};
-		case TOGGLE_EDIT_MODE:
+		case SET_EDIT_MODE:
 			return {
 				...state,
 				editing: action.value

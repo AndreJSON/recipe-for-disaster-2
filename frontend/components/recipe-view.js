@@ -7,7 +7,8 @@ import RecipeCard from './recipe-card';
 
 class RecipeView extends Component {
 	componentDidMount() {
-		this.props.fetchRecipes();
+		if(this.props.recipe === undefined)
+			this.props.fetchRecipes();
 	}
 	render() {
 		var content;

@@ -28,10 +28,33 @@ export function fetchRecipes() {
 	}
 }
 
+export function createRecipe() {
+	return (dispatch) => {
+		return axios.get('/api/id')
+		.then((res) => {
+			dispatch(addEmptyRecipe(res.data.id));
+			dispatch(setDraftRecipe(res.data.id));
+			dispatch(setEditMode(true));
+
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+	}
+}
+
+export const ADD_EMPTY_RECIPE = "ADD_EMPTY_RECIPE";
+function addEmptyRecipe(id) {
+	return {
+		type: ADD_EMPTY_RECIPE,
+		id: id
+	}
+}
+
 export function editRecipe(id) {
 	return (dispatch) => {
 		dispatch(setDraftRecipe(id));
-		dispatch(toggleEditMode(true));
+		dispatch(setEditMode(true));
 	}
 }
 
@@ -59,10 +82,10 @@ export function setDraftText(text) {
 	}
 }
 
-export const TOGGLE_EDIT_MODE = "TOGGLE_EDIT_MODE";
-function toggleEditMode(value) {
+export const SET_EDIT_MODE = "SET_EDIT_MODE";
+function setEditMode(value) {
 	return {
-		type: TOGGLE_EDIT_MODE,
+		type: SET_EDIT_MODE,
 		value: value
 	}
 }

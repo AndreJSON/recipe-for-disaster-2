@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Input } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import { setFilterText } from '../actions';
+import { setFilterText, createRecipe } from '../actions';
 import BackIcon from '@material-ui/icons/NavigateBefore'
 import ListIcon from '@material-ui/icons/FormatListBulleted';
 import AddIcon from '@material-ui/icons/Add';
-import SearchIcon from '@material-ui/icons/Search';
+import FilterIcon from '@material-ui/icons/Search';
 
 const styles = (theme) => ({
 	largeIcon: {
@@ -22,7 +22,7 @@ const styles = (theme) => ({
 		height: "56px",
 		width: "56px"
 	},
-	searchDiv: {
+	filterDiv: {
 		position: 'relative',
 		borderRadius: theme.shape.borderRadius,
 		backgroundColor: fade(theme.palette.common.white, 0.13),
@@ -37,7 +37,7 @@ const styles = (theme) => ({
 			width: 'auto',
 		}
 	},
-	searchIconDiv: {
+	filterIconDiv: {
 		width: theme.spacing.unit * 8,
 		height: '100%',
 		position: 'absolute',
@@ -65,6 +65,17 @@ const styles = (theme) => ({
 
 const Navbar = (props) => {
 	const { classes, filter } = props;
+	const filterInput = props.location.pathname == "/"?
+	(
+		<div className={classes.filterDiv}>
+			<div className={classes.filterIconDiv}>
+				<FilterIcon color="inherit" aria-label="Filter recipes" />
+			</div>
+			<Input classes={{ root: classes.inputRoot, input: classes.inputInput }}
+				onChange={(e) => props.setFilterText(e.target.value)} placeholder="Filter…"
+				spellCheck={false} value={filter} disableUnderline/>
+		</div>
+	) : (undefined);
 	return (
 		<div>
 			<AppBar position="static" color="primary">
@@ -74,22 +85,15 @@ const Navbar = (props) => {
 						<BackIcon className={classes.largerIcon} />
 					</IconButton>
 					<IconButton className={classes.largeButton} color="inherit" aria-label="List recipes"
-						component={NavLink} to="/">
+						component={NavLink} to="/" onClick={() => props.setFilterText("")}>
 						<ListIcon className={classes.largeIcon} />
 					</IconButton>
 					<IconButton className={classes.largeButton} color="inherit" aria-label="Add recipe"
-						component={NavLink} to="/edit">
+						onClick={props.createRecipe}>
 						<AddIcon className={classes.largeIcon} />
 					</IconButton>
 					<div className="flex"/>
-					<div className={classes.searchDiv}>
-						<div className={classes.searchIconDiv}>
-							<SearchIcon color="inherit" aria-label="Filter recipes" />
-						</div>
-						<Input classes={{ root: classes.inputRoot, input: classes.inputInput }}
-							onChange={(e) => props.setFilterText(e.target.value)} placeholder="Filter…"
-							spellCheck={false} value={filter} disableUnderline/>
-					</div>
+					{filterInput}
 				</Toolbar>
 			</AppBar>
 		</div>
@@ -104,7 +108,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		setFilterText: (text) => {dispatch(setFilterText(text))}
+		setFilterText: (text) => {dispatch(setFilterText(text))},
+		createRecipe: () => {dispatch(createRecipe())}
 	}
 }
 

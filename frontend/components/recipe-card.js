@@ -41,7 +41,7 @@ const RecipeCard = (props) => {
 	const title = editing?
 	(
 		<Input value={draftRecipe.title} onChange={(e) => props.setDraftTitle(e.target.value)}
-			fullWidth={true} spellCheck={false}/>
+			fullWidth={true} spellCheck={false} placeholder="Title"/>
 	) :
 	(
 		<Typography variant="title">{recipe.title}</Typography>
@@ -49,7 +49,7 @@ const RecipeCard = (props) => {
 	const text = editing?
 	(
 		<Input value={draftRecipe.text} onChange={(e) => props.setDraftText(e.target.value)}
-			multiline={true} fullWidth={true} spellCheck={false}/>
+			multiline={true} fullWidth={true} spellCheck={false} placeholder="Text"/>
 	) :
 	(
 		<Typography variant="body1" className={props.classes.renderNewlines}>

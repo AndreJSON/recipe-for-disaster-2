@@ -31,7 +31,8 @@ class TagInput extends Component {
 	render() {
 		return (
 			<form onSubmit={(e) => this.onSubmit(e)}>
-				<Input value={this.state.text} onChange={(e) => this.onChange(e)} spellCheck={false}/>
+				<Input value={this.state.text} onChange={(e) => this.onChange(e)} spellCheck={false}
+					placeholder="Tags"/>
 			</form>
 		);
 	}

@@ -20,6 +20,11 @@ module.exports = (app) => {
 		});
 	});
 
+	app.get('/api/id', (req,res) => {
+		res.json({id: mongoose.Types.ObjectId()});
+		res.end();
+	});
+
 	//Catch all non-api calls and let react-router handle it.
 	app.get('/*', (req, res) => {
 		res.sendFile(path.join(__dirname, '../dist/index.html'));
