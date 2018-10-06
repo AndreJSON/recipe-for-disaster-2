@@ -1,13 +1,14 @@
 import {
 	REQUEST_RECIPES, RECEIVE_RECIPES, TOGGLE_EDIT_MODE,
 	SET_DRAFT_RECIPE, SET_DRAFT_TITLE, SET_DRAFT_TEXT,
-	ADD_DRAFT_TAG, DELETE_DRAFT_TAG
+	ADD_DRAFT_TAG, DELETE_DRAFT_TAG, SET_FILTER_TEXT
 } from '../actions';
 
 const initState = {
 	fetching: false,
 	editing: false,
-	recipes: []
+	recipes: [],
+	filter: ""
 }
 
 const rootReducer = (state = initState, action) => {
@@ -67,6 +68,11 @@ const rootReducer = (state = initState, action) => {
 					})
 				}
 			};
+		case SET_FILTER_TEXT:
+			return {
+				...state,
+				filter: action.text
+			}
 		default:
 			return state;
 	}

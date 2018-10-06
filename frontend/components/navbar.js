@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Input } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import { setFilterText } from '../actions';
 import BackIcon from '@material-ui/icons/NavigateBefore'
 import ListIcon from '@material-ui/icons/FormatListBulleted';
 import AddIcon from '@material-ui/icons/Add';
@@ -62,7 +64,7 @@ const styles = (theme) => ({
 });
 
 const Navbar = (props) => {
-	const { classes } = props;
+	const { classes, filter } = props;
 	return (
 		<div>
 			<AppBar position="static" color="primary">
@@ -84,7 +86,9 @@ const Navbar = (props) => {
 						<div className={classes.searchIconDiv}>
 							<SearchIcon color="inherit" aria-label="Filter recipes" />
 						</div>
-						<Input classes={{ root: classes.inputRoot, input: classes.inputInput }} placeholder="Filter…" disableUnderline />
+						<Input classes={{ root: classes.inputRoot, input: classes.inputInput }}
+							onChange={(e) => props.setFilterText(e.target.value)} placeholder="Filter…"
+							spellCheck={false} value={filter} disableUnderline/>
 					</div>
 				</Toolbar>
 			</AppBar>
@@ -92,4 +96,16 @@ const Navbar = (props) => {
 	);
 }
 
-export default withRouter(withStyles(styles)(Navbar));
+const mapStateToProps = (state) => {
+	return {
+		filter: state.filter
+	}
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		setFilterText: (text) => {dispatch(setFilterText(text))}
+	}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(withStyles(styles)(Navbar)));
