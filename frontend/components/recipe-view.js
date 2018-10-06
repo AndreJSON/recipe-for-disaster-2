@@ -9,7 +9,6 @@ class RecipeView extends Component {
 	componentDidMount() {
 		this.props.fetchRecipes();
 	}
-
 	render() {
 		var content;
 		if(this.props.fetching || this.props.recipe === undefined) {

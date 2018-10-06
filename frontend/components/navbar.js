@@ -70,7 +70,7 @@ const Navbar = (props) => {
 			<AppBar position="static" color="primary">
 				<Toolbar disableGutters={true}>
 					<IconButton className={classes.largeButton} color="inherit" aria-label="Back"
-						onClick={() => {props.history.goBack();}} disabled={!props.location.pathname.startsWith("/recipe")}>
+						onClick={() => props.history.goBack()} disabled={!props.location.pathname.startsWith("/recipe")}>
 						<BackIcon className={classes.largerIcon} />
 					</IconButton>
 					<IconButton className={classes.largeButton} color="inherit" aria-label="List recipes"
@@ -108,4 +108,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(withStyles(styles)(Navbar)));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Navbar)));
