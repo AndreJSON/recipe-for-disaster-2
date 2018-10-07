@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import { editRecipe, setDraftTitle, setDraftText, deleteDraftTag } from '../actions';
+import { editRecipe, setDraftTitle, setDraftText, deleteDraftTag, showDiscardDialog } from '../actions';
 import { Card, CardHeader, CardContent, Chip, Input, IconButton, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
@@ -29,7 +29,7 @@ const RecipeCard = (props) => {
 				<DoneIcon/>
 			</IconButton>
 			<IconButton>
-				<CloseIcon/>
+				<CloseIcon onClick={() => props.showDiscardDialog(true)}/>
 			</IconButton>
 		</div>
 	) :
@@ -105,7 +105,8 @@ const mapDispatchToProps = (dispatch) => {
 		editRecipe: (id) => {dispatch(editRecipe(id))},
 		setDraftTitle: (title) => {dispatch(setDraftTitle(title))},
 		setDraftText: (text) => {dispatch(setDraftText(text))},
-		deleteDraftTag: (tag) => {dispatch(deleteDraftTag(tag))}
+		deleteDraftTag: (tag) => {dispatch(deleteDraftTag(tag))},
+		showDiscardDialog: (bool) => dispatch(showDiscardDialog(bool))
 	};
 }
 

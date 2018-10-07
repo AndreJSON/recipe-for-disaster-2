@@ -2,12 +2,14 @@ import {
 	REQUEST_RECIPES, RECEIVE_RECIPES, SET_EDIT_MODE,
 	SET_DRAFT_RECIPE, SET_DRAFT_TITLE, SET_DRAFT_TEXT,
 	ADD_DRAFT_TAG, DELETE_DRAFT_TAG, SET_FILTER_TEXT,
-	ADD_EMPTY_RECIPE
+	ADD_EMPTY_RECIPE, SHOW_DISCARD_DIALOG
 } from '../actions';
 
 const initState = {
 	fetching: false,
 	editing: false,
+	discardDialogOpen: false,
+	saveDialogOpen: false,
 	recipes: [],
 	filter: ""
 }
@@ -54,7 +56,7 @@ const rootReducer = (state = initState, action) => {
 		case SET_EDIT_MODE:
 			return {
 				...state,
-				editing: action.value
+				editing: action.bool
 			};
 		case ADD_DRAFT_TAG:
 			return {
@@ -78,6 +80,11 @@ const rootReducer = (state = initState, action) => {
 			return {
 				...state,
 				filter: action.text
+			}
+		case SHOW_DISCARD_DIALOG:
+			return {
+				...state,
+				discardDialogOpen: action.bool
 			}
 		default:
 			return state;

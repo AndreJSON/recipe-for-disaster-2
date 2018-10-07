@@ -18,20 +18,18 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(
 	<Provider store={store}>
-		<React.Fragment>
-			<MuiThemeProvider theme={theme}>
-				<CssBaseline/>
-				<Router history={history}>
-					<div>
-						<Navbar/>
-						<div className="padded">
-							<Route exact path='/' component={RecipeList}/>
-							<Route path='/recipe/:id' component={RecipeView}/>
-						</div>
+		<MuiThemeProvider theme={theme}>
+			<CssBaseline/>
+			<Router history={history}>
+				<div>
+					<Navbar/>
+					<div className="padded">
+						<Route exact path='/' component={RecipeList}/>
+						<Route path='/recipe/:id' component={RecipeView}/>
 					</div>
-				</Router>
-			</MuiThemeProvider>
-		</React.Fragment>
+				</div>
+			</Router>
+		</MuiThemeProvider>
 	</Provider>,
 	document.getElementById('root')
 );

@@ -84,10 +84,10 @@ export function setDraftText(text) {
 }
 
 export const SET_EDIT_MODE = "SET_EDIT_MODE";
-function setEditMode(value) {
+function setEditMode(bool) {
 	return {
 		type: SET_EDIT_MODE,
-		value: value
+		bool: bool
 	}
 }
 
@@ -112,5 +112,20 @@ export function setFilterText(text) {
 	return {
 		type: SET_FILTER_TEXT,
 		text: text
+	}
+}
+
+export const SHOW_DISCARD_DIALOG = "SHOW_DISCARD_DIALOG";
+export function showDiscardDialog(bool) {
+	return {
+		type: SHOW_DISCARD_DIALOG,
+		bool: bool
+	}
+}
+
+export function discardDraft() {
+	return (dispatch) => {
+		dispatch(setEditMode(false));
+		dispatch(showDiscardDialog(false));
 	}
 }

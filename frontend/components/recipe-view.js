@@ -4,6 +4,7 @@ import { fetchRecipes } from '../actions';
 import { Grid } from '@material-ui/core';
 import Spinner from './spinner';
 import RecipeCard from './recipe-card';
+import DiscardEditModal from "./discard-edit-modal";
 
 class RecipeView extends Component {
 	componentDidMount() {
@@ -24,11 +25,14 @@ class RecipeView extends Component {
 			);
 		}
 		return (
-			<Grid container>
-				<Grid item xs/>
-				{content}
-				<Grid item xs/>
-			</Grid>
+			<React.Fragment>
+				<Grid container>
+					<Grid item xs/>
+					{content}
+					<Grid item xs/>
+				</Grid>
+				<DiscardEditModal/>
+			</React.Fragment>
 		);
 	}
 }

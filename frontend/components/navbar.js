@@ -64,36 +64,32 @@ const styles = (theme) => ({
 });
 
 const Navbar = (props) => {
-	const { classes, filter } = props;
-	const filterInput = props.location.pathname == "/"?
-	(
-		<div className={classes.filterDiv}>
-			<div className={classes.filterIconDiv}>
-				<FilterIcon color="inherit" aria-label="Filter recipes" />
-			</div>
-			<Input classes={{ root: classes.inputRoot, input: classes.inputInput }}
-				onChange={(e) => props.setFilterText(e.target.value)} placeholder="Filter…"
-				spellCheck={false} value={filter} disableUnderline/>
-		</div>
-	) : (undefined);
+	const { classes, filter, editing } = props;
 	return (
 		<div>
 			<AppBar position="static" color="primary">
 				<Toolbar disableGutters={true}>
 					<IconButton className={classes.largeButton} color="inherit" aria-label="Back"
-						onClick={() => props.history.goBack()} disabled={!props.location.pathname.startsWith("/recipe")}>
+						onClick={() => props.history.goBack()} disabled={!props.location.pathname.startsWith("/recipe") || editing}>
 						<BackIcon className={classes.largerIcon} />
 					</IconButton>
 					<IconButton className={classes.largeButton} color="inherit" aria-label="List recipes"
-						component={NavLink} to="/" onClick={() => props.setFilterText("")}>
+						component={NavLink} to="/" onClick={() => props.setFilterText("")} disabled={editing}>
 						<ListIcon className={classes.largeIcon} />
 					</IconButton>
 					<IconButton className={classes.largeButton} color="inherit" aria-label="Add recipe"
-						onClick={props.createRecipe}>
+						onClick={props.createRecipe} disabled={editing}>
 						<AddIcon className={classes.largeIcon} />
 					</IconButton>
 					<div className="flex"/>
-					{filterInput}
+					<div className={classes.filterDiv}>
+						<div className={classes.filterIconDiv}>
+							<FilterIcon color={editing? "disabled":"inherit"} aria-label="Filter recipes"/>
+						</div>
+						<Input classes={{ root: classes.inputRoot, input: classes.inputInput }}
+							onChange={(e) => props.setFilterText(e.target.value)} placeholder="Filter…"
+							spellCheck={false} value={filter} disableUnderline disabled={props.location.pathname !== "/"}/>
+					</div>
 				</Toolbar>
 			</AppBar>
 		</div>
@@ -102,7 +98,8 @@ const Navbar = (props) => {
 
 const mapStateToProps = (state) => {
 	return {
-		filter: state.filter
+		filter: state.filter,
+		editing: state.editing
 	}
 };
 
