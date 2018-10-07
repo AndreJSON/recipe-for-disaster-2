@@ -1,4 +1,5 @@
 import axios from 'axios';
+import history from './history';
 
 export const REQUEST_RECIPES = "REQUEST_RECIPES";
 function requestRecipes() {
@@ -35,7 +36,7 @@ export function createRecipe() {
 			dispatch(addEmptyRecipe(res.data.id));
 			dispatch(setDraftRecipe(res.data.id));
 			dispatch(setEditMode(true));
-
+			history.push('/recipe/' + res.data.id);
 		})
 		.catch((err) => {
 			console.log(err);
