@@ -1,27 +1,29 @@
 import axios from 'axios';
 import history from './history';
 
-export const REQUEST_RECIPES = "REQUEST_RECIPES";
-function requestRecipes() {
+export const SET_FETCHING = "SET_FETCHING";
+function setFetching(bool) {
 	return {
-		type: REQUEST_RECIPES
+		type: SET_FETCHING,
+		bool: bool
 	}
 }
 
-export const RECEIVE_RECIPES = "RECEIVE_RECIPES";
-function receiveRecipes(recipes) {
+export const SET_RECIPES = "SET_RECIPES";
+function setRecipes(recipes) {
 	return {
-		type: RECEIVE_RECIPES,
+		type: SET_RECIPES,
 		recipes: recipes
 	}
 }
 
 export function fetchRecipes() {
 	return (dispatch) => {
-		dispatch(requestRecipes());
+		dispatch(setFetching(true));
 		return axios.get('/api/recipes')
 		.then((res) => {
-			dispatch(receiveRecipes(res.data.recipes));
+			dispatch(setRecipes(res.data.recipes));
+			dispatch(setFetching(false));
 		})
 		.catch((err) => {
 			console.log(err);
@@ -127,5 +129,20 @@ export function discardDraft() {
 	return (dispatch) => {
 		dispatch(setEditMode(false));
 		dispatch(showDiscardDialog(false));
+	}
+}
+
+export function saveDraft(recipe) {
+	return (dispatch) => {
+		dispatch(setFetching(true));
+		axios.post('/api/recipes', recipe)
+		.then((res) => {
+			dispatch(setRecipes(res.data.recipes));
+			dispatch(setFetching(false));
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+		dispatch(setEditMode(false));
 	}
 }

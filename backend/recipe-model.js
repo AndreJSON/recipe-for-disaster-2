@@ -7,7 +7,8 @@ const RecipeSchema = new Schema({
 	title: String,
 	text: String,
 	tags: [String],
-	created: Date,
+	createdAt: Date,
+	updatedAt: Date,
 	visible: Boolean
 });
 

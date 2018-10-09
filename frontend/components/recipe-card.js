@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import { editRecipe, setDraftTitle, setDraftText, deleteDraftTag, showDiscardDialog } from '../actions';
+import {
+	editRecipe, setDraftTitle, setDraftText, deleteDraftTag,
+	showDiscardDialog, saveDraft
+} from '../actions';
 import { Card, CardHeader, CardContent, Chip, Input, IconButton, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
@@ -28,7 +31,7 @@ const RecipeCard = (props) => {
 	const actions = editing?
 	(
 		<div>
-			<IconButton color="primary">
+			<IconButton color="primary" onClick={() => props.saveDraft(draftRecipe)}>
 				<DoneIcon/>
 			</IconButton>
 			<IconButton color="secondary" onClick={() => props.showDiscardDialog(true)}>
@@ -111,7 +114,8 @@ const mapDispatchToProps = (dispatch) => {
 		setDraftTitle: (title) => {dispatch(setDraftTitle(title))},
 		setDraftText: (text) => {dispatch(setDraftText(text))},
 		deleteDraftTag: (tag) => {dispatch(deleteDraftTag(tag))},
-		showDiscardDialog: (bool) => dispatch(showDiscardDialog(bool))
+		showDiscardDialog: (bool) => dispatch(showDiscardDialog(bool)),
+		saveDraft: (recipe) => dispatch(saveDraft(recipe))
 	};
 }
 

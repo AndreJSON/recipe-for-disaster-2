@@ -1,5 +1,5 @@
 import {
-	REQUEST_RECIPES, RECEIVE_RECIPES, SET_EDIT_MODE,
+	SET_FETCHING, SET_RECIPES, SET_EDIT_MODE,
 	SET_DRAFT_RECIPE, SET_DRAFT_TITLE, SET_DRAFT_TEXT,
 	ADD_DRAFT_TAG, DELETE_DRAFT_TAG, SET_FILTER_TEXT,
 	ADD_EMPTY_RECIPE, SHOW_DISCARD_DIALOG
@@ -16,15 +16,14 @@ const initState = {
 
 const rootReducer = (state = initState, action) => {
 	switch(action.type) {
-		case REQUEST_RECIPES:
+		case SET_FETCHING:
 			return {
 				...state,
-				fetching: true
-			};
-		case RECEIVE_RECIPES:
+				fetching: action.bool
+			}
+		case SET_RECIPES:
 			return {
 				...state,
-				fetching: false,
 				recipes: action.recipes
 			};
 		case ADD_EMPTY_RECIPE:

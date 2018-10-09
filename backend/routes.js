@@ -30,17 +30,35 @@ module.exports = (app) => {
 		res.sendFile(path.join(__dirname, '../dist/index.html'));
 	});
 
-	app.post('/api/recipe', (req,res) => {
-		let recipe = new Recipe({...req.body, created: new Date(), visible: true});
-		recipe.save((err) => {
+	app.post('/api/recipes', (req,res) => {
+		const recipe = req.body;
+		const updatedRecipe = {
+			_id: recipe._id,
+			title: recipe.title,
+			text: recipe.text,
+			tags: recipe.tags,
+			createdAt: recipe.createdAt || new Date(),
+			updatedAt: new Date(),
+			visible: recipe.visible === undefined? true:recipe.visible,
+		};
+		Recipe.findOneAndUpdate({_id: req.body._id}, updatedRecipe, {upsert:true, new:true}, (err) => {
 			if(err) {
 				console.log(err);
 				res.statusCode = 500;
-				res.statusMessage = "Failed to add recipe.";
+				res.statusMessage = "Failed to update recipe.";
 				res.end();
 			} else {
-				res.json(recipe);
-				res.end();
+				Recipe.find({}, (err, docs) => {
+					if(err) {
+						console.log(err);
+						res.statusCode = 500;
+						res.statusMessage = "Failed to get recipes.";
+						res.end();
+					} else {
+						res.json({recipes: docs});
+						res.end();
+					}
+				});
 			}
 		});
 	});
