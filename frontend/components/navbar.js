@@ -26,15 +26,17 @@ const styles = (theme) => ({
 		position: 'relative',
 		borderRadius: theme.shape.borderRadius,
 		backgroundColor: fade(theme.palette.common.white, 0.13),
-		'&:hover': {
-			backgroundColor: fade(theme.palette.common.white, 0.25),
-		},
 		marginLeft: 0,
 		marginRight: "15px",
 		width: '100%',
 		[theme.breakpoints.up('sm')]: {
 			marginLeft: theme.spacing.unit,
 			width: 'auto',
+		}
+	},
+	filterDivHoverChange: {
+		'&:hover': {
+			backgroundColor: fade(theme.palette.common.white, 0.25),
 		}
 	},
 	filterIconDiv: {
@@ -65,6 +67,7 @@ const styles = (theme) => ({
 
 const Navbar = (props) => {
 	const { classes, filter, editing } = props;
+	const onRecipeListPage = props.location.pathname !== "/";
 	return (
 		<div>
 			<AppBar position="static" color="primary">
@@ -82,13 +85,13 @@ const Navbar = (props) => {
 						<AddIcon className={classes.largeIcon} />
 					</IconButton>
 					<div className="flex"/>
-					<div className={classes.filterDiv}>
+					<div className={classes.filterDiv + (onRecipeListPage? "": " "+classes.filterDivHoverChange)}>
 						<div className={classes.filterIconDiv}>
-							<FilterIcon color={editing? "disabled":"inherit"} aria-label="Filter recipes"/>
+							<FilterIcon color={onRecipeListPage? "disabled":"inherit"} aria-label="Filter recipes"/>
 						</div>
 						<Input classes={{ root: classes.inputRoot, input: classes.inputInput }}
 							onChange={(e) => props.setFilterText(e.target.value)} placeholder="Filter…"
-							spellCheck={false} value={filter} disableUnderline disabled={props.location.pathname !== "/"}/>
+							spellCheck={false} value={filter} disableUnderline disabled={onRecipeListPage}/>
 					</div>
 				</Toolbar>
 			</AppBar>

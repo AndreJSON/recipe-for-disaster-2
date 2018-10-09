@@ -15,6 +15,9 @@ const styles = (theme) => ({
 	topPadded: {
 		paddingTop: "16px"
 	},
+	rightPadded: {
+		paddingRight: "8px"
+	},
 	chipDiv: {
 		display: "flex"
 	}
@@ -25,11 +28,11 @@ const RecipeCard = (props) => {
 	const actions = editing?
 	(
 		<div>
-			<IconButton>
+			<IconButton color="primary">
 				<DoneIcon/>
 			</IconButton>
-			<IconButton>
-				<CloseIcon onClick={() => props.showDiscardDialog(true)}/>
+			<IconButton color="secondary" onClick={() => props.showDiscardDialog(true)}>
+				<CloseIcon/>
 			</IconButton>
 		</div>
 	) :
@@ -59,11 +62,13 @@ const RecipeCard = (props) => {
 	const tags = editing?
 	(
 		<div className={props.classes.chipDiv}>
-			{draftRecipe.tags.map((tag, index) => {
-				return (
-					<Chip label={tag} key={index} onDelete={() => props.deleteDraftTag(tag)}/>
-				);
-			})}
+			<div className={draftRecipe.tags.length > 0? props.classes.rightPadded:""}>
+				{draftRecipe.tags.map((tag, index) => {
+					return (
+						<Chip color="secondary" label={tag} key={index} onDelete={() => props.deleteDraftTag(tag)}/>
+					);
+				})}
+			</div>
 			<TagInput/>
 		</div>
 	) :

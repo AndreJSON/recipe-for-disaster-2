@@ -15,13 +15,13 @@ const DiscardEditModal = (props) => {
 				</DialogContentText>
 			</DialogContent>
 			<DialogActions>
-				<Button color="secondary" variant="raised" aria-label="Discard changes"
-					className="flex" onClick={props.discardDraft}>
-					Discard
-				</Button>
 				<Button color="primary" variant="raised" aria-label="Keep editing"
 					className="flex" onClick={() => props.showDiscardDialog(false)}>
 					Keep editing
+				</Button>
+				<Button color="secondary" variant="raised" aria-label="Discard changes"
+					className="flex" onClick={props.discardDraft}>
+					Discard
 				</Button>
 			</DialogActions>
 		</Dialog>
