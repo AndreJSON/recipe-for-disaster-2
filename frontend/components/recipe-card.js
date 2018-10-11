@@ -10,6 +10,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
 import CloseIcon from '@material-ui/icons/Close';
 import TagInput from './tag-input';
+import ImageDropzone from './image-dropzone';
 
 const styles = (theme) => ({
 	renderNewlines: {
@@ -92,6 +93,7 @@ const RecipeCard = (props) => {
 				title={title}
 			/>
 			<CardContent>
+				<ImageDropzone/>
 				{text}
 				<div className={props.classes.topPadded}>
 					{tags}
