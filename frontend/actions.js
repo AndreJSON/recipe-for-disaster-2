@@ -146,3 +146,32 @@ export function saveDraft(recipe) {
 		dispatch(setEditMode(false));
 	}
 }
+
+export function uploadImage(file,_id) {
+	return (dispatch) => {
+		const imageName = _id + file.name.slice(file.name.indexOf("."));
+		const formData = new FormData();
+		formData.append('filename', imageName);
+		formData.append('image',file);
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+		axios.post('api/images',formData,config)
+		.then((res) => {
+			dispatch(setDraftImageName(imageName));
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+	}
+}
+
+export const SET_DRAFT_IMAGE_NAME = "SET_DRAFT_IMAGE_NAME";
+export function setDraftImageName(imageName) {
+	return {
+		type: SET_DRAFT_IMAGE_NAME,
+		imageName: imageName
+	}
+}

@@ -1,36 +1,36 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import UploadIcon from '@material-ui/icons/CloudUpload';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { uploadImage } from '../actions';
 
-const onDrop = (acceptedFiles, rejectedFiles) => {
+const onDrop = (acceptedFiles, rejectedFiles, _id, uploadImage) => {
 	if(rejectedFiles.length > 0)
 		console.log(rejectedFiles);
 	acceptedFiles.forEach(file => {
-		const formData = new FormData();
-		formData.append('filename', "123" + file.name.slice(file.name.indexOf(".")));
-		formData.append('image',file);
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        };
-		axios.post('api/images',formData,config)
-		.then((res) => {
-			console.log(res);
-		})
-		.catch((err) => {
-			console.log(err);
-		});
+		uploadImage(file,_id);
 	});
 };
 
 const ImageDropzone = (props) => {
 	return (
-		<Dropzone onDrop={onDrop} accept="image/png, image/jpeg">
+		<Dropzone accept="image/png, image/jpeg"
+			onDrop={(acceptedFiles,rejectedFiles) => onDrop(acceptedFiles,rejectedFiles,props.draftRecipe._id,props.uploadImage)}>
 			<UploadIcon/>
 		</Dropzone>
 	);
 };
 
-export default ImageDropzone;
+const mapStateToProps = (state) => {
+	return {
+		draftRecipe: state.draftRecipe
+	};
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		uploadImage: (file,_id) => dispatch(uploadImage(file,_id))
+	};
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(ImageDropzone);

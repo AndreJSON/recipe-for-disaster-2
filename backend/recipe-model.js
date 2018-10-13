@@ -9,7 +9,8 @@ const RecipeSchema = new Schema({
 	tags: [String],
 	createdAt: Date,
 	updatedAt: Date,
-	visible: Boolean
+	visible: Boolean,
+	imageName: String
 });
 
 const RecipeModel = mongoose.model("Recipe", RecipeSchema);

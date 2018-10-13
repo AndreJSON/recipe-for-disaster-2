@@ -2,7 +2,7 @@ import {
 	SET_FETCHING, SET_RECIPES, SET_EDIT_MODE,
 	SET_DRAFT_RECIPE, SET_DRAFT_TITLE, SET_DRAFT_TEXT,
 	ADD_DRAFT_TAG, DELETE_DRAFT_TAG, SET_FILTER_TEXT,
-	ADD_EMPTY_RECIPE, SHOW_DISCARD_DIALOG
+	ADD_EMPTY_RECIPE, SHOW_DISCARD_DIALOG, SET_DRAFT_IMAGE_NAME
 } from '../actions';
 
 const initState = {
@@ -84,6 +84,14 @@ const rootReducer = (state = initState, action) => {
 			return {
 				...state,
 				discardDialogOpen: action.bool
+			}
+		case SET_DRAFT_IMAGE_NAME:
+			return {
+				...state,
+				draftRecipe: {
+					...state.draftRecipe,
+					imageName: action.imageName
+				}
 			}
 		default:
 			return state;

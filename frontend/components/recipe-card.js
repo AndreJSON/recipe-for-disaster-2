@@ -53,6 +53,19 @@ const RecipeCard = (props) => {
 	(
 		<Typography variant="title">{recipe.title}</Typography>
 	);
+	const imageArea = editing?
+	(
+		<ImageDropzone/>
+	) :
+	(
+		recipe.imageName?
+		(
+			<img src={"/images/" + recipe.imageName}/>
+		) :
+		(
+			undefined
+		)
+	);
 	const text = editing?
 	(
 		<Input value={draftRecipe.text} onChange={(e) => props.setDraftText(e.target.value)}
@@ -93,7 +106,7 @@ const RecipeCard = (props) => {
 				title={title}
 			/>
 			<CardContent>
-				<ImageDropzone/>
+				{imageArea}
 				{text}
 				<div className={props.classes.topPadded}>
 					{tags}
