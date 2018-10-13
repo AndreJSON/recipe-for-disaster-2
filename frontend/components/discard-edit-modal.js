@@ -1,10 +1,16 @@
 import React from 'react';
+import history from '../history';
 import { connect } from 'react-redux';
 import { discardDraft, showDiscardDialog } from "../actions";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText } from '@material-ui/core';
 
 const DiscardEditModal = (props) => {
 	const { discardDialogOpen } = props;
+	const onDiscard = () => {
+		props.discardDraft();
+		if (props.draftRecipe.createdAt === undefined)
+			history.push('/');
+	}
 	return (
 		<Dialog open={discardDialogOpen}>
 			<DialogContent>
@@ -20,7 +26,7 @@ const DiscardEditModal = (props) => {
 					Keep editing
 				</Button>
 				<Button color="secondary" variant="raised" aria-label="Discard changes"
-					className="flex" onClick={props.discardDraft}>
+					className="flex" onClick={onDiscard}>
 					Discard
 				</Button>
 			</DialogActions>
@@ -30,7 +36,8 @@ const DiscardEditModal = (props) => {
 
 const mapStateToProps = (state) => {
 	return {
-		discardDialogOpen: state.discardDialogOpen
+		discardDialogOpen: state.discardDialogOpen,
+		draftRecipe: state.draftRecipe
 	}
 };
 

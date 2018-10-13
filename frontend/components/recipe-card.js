@@ -5,7 +5,7 @@ import {
 	editRecipe, setDraftTitle, setDraftText, deleteDraftTag,
 	showDiscardDialog, saveDraft
 } from '../actions';
-import { Card, CardHeader, CardContent, Chip, Input, IconButton, Typography } from '@material-ui/core';
+import { Card, CardHeader, CardContent, Chip, Grid, Input, IconButton, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
 import CloseIcon from '@material-ui/icons/Close';
@@ -24,6 +24,9 @@ const styles = (theme) => ({
 	},
 	chipDiv: {
 		display: "flex"
+	},
+	image: {
+		maxWidth: "100%"
 	}
 });
 
@@ -53,18 +56,21 @@ const RecipeCard = (props) => {
 	(
 		<Typography variant="title">{recipe.title}</Typography>
 	);
-	const imageArea = editing?
+	const uploadArea = editing?
 	(
-		<ImageDropzone/>
+		<Grid item xs>
+			<ImageDropzone/>
+		</Grid>
 	) :
 	(
-		recipe.imageName?
-		(
-			<img src={"/images/" + recipe.imageName}/>
-		) :
-		(
-			undefined
-		)
+		undefined
+	);
+	const imageArea = recipe.imageName?
+	(
+		<img src={"/images/" + recipe.imageName} className={props.classes.image}/>
+	) :
+	(
+		undefined
 	);
 	const text = editing?
 	(
@@ -106,7 +112,12 @@ const RecipeCard = (props) => {
 				title={title}
 			/>
 			<CardContent>
-				{imageArea}
+				<Grid container spacing={16}>
+					{uploadArea}
+					<Grid item xs>
+						{imageArea}
+					</Grid>
+				</Grid>
 				{text}
 				<div className={props.classes.topPadded}>
 					{tags}
