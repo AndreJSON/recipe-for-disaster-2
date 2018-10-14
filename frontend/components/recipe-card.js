@@ -65,12 +65,24 @@ const RecipeCard = (props) => {
 	(
 		undefined
 	);
-	const imageArea = recipe.imageName?
+	const imageArea = editing?
 	(
-		<img src={"/images/" + recipe.imageName} className={props.classes.image}/>
+		draftRecipe.imageName?
+		(
+			<img src={"/images/" + draftRecipe.imageName} className={props.classes.image}/>
+		) :
+		(
+			undefined
+		)
 	) :
 	(
-		undefined
+		recipe.imageName?
+		(
+			<img src={"/images/" + recipe.imageName} className={props.classes.image}/>
+		) :
+		(
+			undefined
+		)
 	);
 	const text = editing?
 	(

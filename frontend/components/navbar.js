@@ -68,6 +68,7 @@ const styles = (theme) => ({
 const Navbar = (props) => {
 	const { classes, filter, editing } = props;
 	const onRecipeListPage = props.location.pathname !== "/";
+	var filterRef = React.createRef();
 	return (
 		<div>
 			<AppBar position="static" color="primary">
@@ -89,9 +90,11 @@ const Navbar = (props) => {
 						<div className={classes.filterIconDiv}>
 							<FilterIcon color={onRecipeListPage? "disabled":"inherit"} aria-label="Filter recipes"/>
 						</div>
-						<Input classes={{ root: classes.inputRoot, input: classes.inputInput }}
-							onChange={(e) => props.setFilterText(e.target.value)} placeholder="Filter…"
-							spellCheck={false} value={filter} disableUnderline disabled={onRecipeListPage}/>
+						<form onSubmit={(e) => {e.preventDefault(); filterRef.current.inputRef.blur();}}>
+							<Input classes={{ root: classes.inputRoot, input: classes.inputInput }} innerRef={filterRef}
+								onChange={(e) => props.setFilterText(e.target.value)} placeholder="Filter…"
+								spellCheck={false} value={filter} disableUnderline disabled={onRecipeListPage}/>
+						</form>
 					</div>
 				</Toolbar>
 			</AppBar>
