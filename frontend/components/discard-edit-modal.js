@@ -15,9 +15,7 @@ const DiscardEditModal = (props) => {
 		<Dialog open={discardDialogOpen}>
 			<DialogContent>
 				<DialogContentText>
-					Quit editing and discard all
-					<br/>
-					changes made to this recipe?
+					Discard changes made to this recipe?
 				</DialogContentText>
 			</DialogContent>
 			<DialogActions>

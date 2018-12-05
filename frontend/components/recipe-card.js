@@ -14,7 +14,7 @@ import ImageDropzone from './image-dropzone';
 
 const styles = (theme) => ({
 	renderNewlines: {
-		whiteSpace: "pre"
+		whiteSpace: "pre-wrap"
 	},
 	topPadded: {
 		paddingTop: "16px"
